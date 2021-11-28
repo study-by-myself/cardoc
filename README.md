@@ -12,6 +12,12 @@ yarn
 yarn start
 ```
 
+### using swagger url
+```shell
+localhost:3000/api
+```
+
+
 <br /><br />
 
 ## 구현 방법과 이유
