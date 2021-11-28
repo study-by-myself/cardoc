@@ -34,7 +34,6 @@ export class TiresService {
         rear_wheel_size: rearWheelSize,
       };
       result.push(newItem);
-      // cashing해서 다 안보내기
     }
     await this.tiresRepository.save(result);
   }

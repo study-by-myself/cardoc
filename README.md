@@ -1,75 +1,81 @@
-# to be updated
 
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+## How to run
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
-
-```bash
-$ npm install
+### git clone
+```shell
+git clone https://github.com/study-by-myself/cardoc.git
 ```
 
-## Running the app
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+### start at 3000 port
+```shell
+yarn
+yarn start
 ```
 
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+### using swagger url
+```shell
+localhost:3000/api
 ```
 
-## Support
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+<br /><br />
 
-## Stay in touch
+## 구현 방법과 이유
+- nestjs와 sqlite, typeorm을 이용하여 구현
+- 빠르고 간편한 개발을 위해 nestjs를 사용.
+- 유지 보수를 위해 typeorm을 사용.
+- 가장 큰 이유는 nestjs와 typeorm을 한 번 쯤 써보고 싶었음.
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+<br /><br />
 
-## License
+## 서버 구조 및 디자인패턴
+### repository pattern
+![image](https://user-images.githubusercontent.com/60090391/143772807-0f745e2e-ecb7-41b0-9e1d-bcad361e52fb.png)
 
-Nest is [MIT licensed](LICENSE).
+- db model과 db model에 접근하기 위한 logic을 분리하기 위함
+- nestjs에서 repository pattern을 적극 권장해서 한 번 써보고 싶었음
+- 써보니까 관심사가 분리되어 active record pattern에 비해 좀 더 깔끔하다는 느낌을 받았음.
+
+<br /><br />
+
+## ERD
+<img width="811" alt="스크린샷 2021-11-28 오후 11 28 36" src="https://user-images.githubusercontent.com/60090391/143772121-bcc68b34-a80a-4de9-8cdb-fdf052812147.png">
+
+<br /><br />
+
+## API Document
+
+### POST `/users`
+```ts
+/* Request Body 예제 */
+{ "id": "candycandy", "password": "ASdfdsf3232@" }
+```
+
+### POST `/tires`
+```ts
+/* Request Body 예제 */
+{"data": [
+  {
+    "id": "candycandy",
+    "trimId": 5000
+  },
+  {
+    "id": "mylovewolkswagen",
+    "trimId": 9000
+  },
+  {
+    "id": "bmwwow",
+    "trimId": 11000
+  },
+  {
+    "id": "dreamcar",
+    "trimId": 15000
+  }
+]}
+```
+
+### GET `/tires/<id:string>`
+
+
+
+
