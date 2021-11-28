@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { TiresService } from './tires.service';
 import { CreateTireDto } from './dto/create-tire.dto';
 
@@ -14,5 +14,10 @@ export class TiresController {
   @Get()
   findAll() {
     return this.tiresService.findAll();
+  }
+
+  @Get('/:id')
+  findOne(@Param('id') id: string) {
+    return this.tiresService.findOne(id);
   }
 }

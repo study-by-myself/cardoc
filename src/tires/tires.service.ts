@@ -15,10 +15,6 @@ export class TiresService {
   ) {}
 
   async create(createTireDto: CreateTireDto) {
-    //const newItem = createTireDto.data.map((item) => ({
-    //  user_id: item.id,
-    //  trim_id: item.trimId,
-    //}));
     // 인가 구현하기
     const result = [];
     for (const item of createTireDto.data) {
@@ -43,14 +39,13 @@ export class TiresService {
       // cashing해서 다 안보내기
     }
     await this.tiresRepository.save(result);
-    return 'haha';
   }
 
-  findAll() {
-    return `This action returns all tires`;
+  async findAll() {
+    return await this.tiresRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} tire`;
+  async findOne(id: string) {
+    return await this.tiresRepository.findOne({ where: { user_id: id } });
   }
 }
