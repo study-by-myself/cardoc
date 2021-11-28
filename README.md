@@ -12,9 +12,9 @@ yarn
 yarn start
 ```
 
-### using swagger
+### using swagger url
 ```shell
-localhost:3000/api 로 접속
+localhost:3000/api
 ```
 
 
