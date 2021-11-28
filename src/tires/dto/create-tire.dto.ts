@@ -1,14 +1,15 @@
-import { IsString } from 'class-validator';
+import { IsString, IsArray, IsNumber, ValidateNested } from 'class-validator';
 
 class UserTire {
+  @IsString()
   id: string;
+
+  @IsNumber()
   trimId: number;
 }
 
 export class CreateTireDto {
-  @IsString()
-  readonly id: string;
-
-  @IsString()
-  readonly password: string;
+  @IsArray()
+  @ValidateNested({ each: true })
+  readonly data: UserTire[];
 }
