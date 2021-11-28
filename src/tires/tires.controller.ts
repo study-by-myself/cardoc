@@ -1,34 +1,43 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { JwtAuthGuard } from './../users/jwt-auth.guard';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  BadRequestException,
+  UseGuards,
+} from '@nestjs/common';
 import { TiresService } from './tires.service';
 import { CreateTireDto } from './dto/create-tire.dto';
-import { UpdateTireDto } from './dto/update-tire.dto';
 
 @Controller('tires')
 export class TiresController {
   constructor(private readonly tiresService: TiresService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post()
-  create(@Body() createTireDto: CreateTireDto) {
-    return this.tiresService.create(createTireDto);
+  async create(@Body() createTireDto: CreateTireDto) {
+    try {
+      await this.tiresService.create(createTireDto);
+    } catch (e) {
+      throw new BadRequestException({ message: '정보가 부족합니다' });
+    }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get()
-  findAll() {
-    return this.tiresService.findAll();
+  async findAll() {
+    return await this.tiresService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.tiresService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTireDto: UpdateTireDto) {
-    return this.tiresService.update(+id, updateTireDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.tiresService.remove(+id);
+  @UseGuards(JwtAuthGuard)
+  @Get('/:id')
+  async findOne(@Param('id') id: string) {
+    try {
+      return await this.tiresService.findOne(id);
+    } catch (e) {
+      throw e;
+    }
   }
 }
