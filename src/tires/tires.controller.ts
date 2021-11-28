@@ -10,7 +10,10 @@ import {
 } from '@nestjs/common';
 import { TiresService } from './tires.service';
 import { CreateTireDto } from './dto/create-tire.dto';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 
+@ApiBearerAuth()
+@ApiTags('tires')
 @Controller('tires')
 export class TiresController {
   constructor(private readonly tiresService: TiresService) {}
