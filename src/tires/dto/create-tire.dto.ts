@@ -2,10 +2,10 @@ import { IsString, IsArray, IsNumber, ValidateNested } from 'class-validator';
 
 class UserTire {
   @IsString()
-  id: string;
+  id!: string;
 
   @IsNumber()
-  trimId: number;
+  trimId!: number;
 }
 
 export class CreateTireDto {

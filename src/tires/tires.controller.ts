@@ -1,4 +1,11 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  BadRequestException,
+} from '@nestjs/common';
 import { TiresService } from './tires.service';
 import { CreateTireDto } from './dto/create-tire.dto';
 
@@ -7,17 +14,25 @@ export class TiresController {
   constructor(private readonly tiresService: TiresService) {}
 
   @Post()
-  create(@Body() createTireDto: CreateTireDto) {
-    return this.tiresService.create(createTireDto);
+  async create(@Body() createTireDto: CreateTireDto) {
+    try {
+      await this.tiresService.create(createTireDto);
+    } catch (e) {
+      throw new BadRequestException({ message: '정보가 부족합니다' });
+    }
   }
 
   @Get()
-  findAll() {
-    return this.tiresService.findAll();
+  async findAll() {
+    return await this.tiresService.findAll();
   }
 
   @Get('/:id')
-  findOne(@Param('id') id: string) {
-    return this.tiresService.findOne(id);
+  async findOne(@Param('id') id: string) {
+    try {
+      return await this.tiresService.findOne(id);
+    } catch (e) {
+      throw e;
+    }
   }
 }

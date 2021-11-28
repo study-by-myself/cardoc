@@ -1,5 +1,9 @@
 import { User } from './entities/user.entity';
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  BadRequestException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -18,7 +22,7 @@ export class UsersService {
     const { id, password } = createUserDto;
     const user = await this.usersRepository.findOne({ nickname: id });
     if (user) {
-      throw new ForbiddenException({ description: '중복된 id 입니다' });
+      throw new BadRequestException({ message: '중복된 ID 입니다' });
     }
     const hashed = await bcrypt.hash(password, 10);
     const newUser = await this.usersRepository.save({
@@ -33,6 +37,10 @@ export class UsersService {
   }
 
   async findByNickname(id: string): Promise<User> {
-    return await this.usersRepository.findOne({ where: { nickname: id } });
+    const res = await this.usersRepository.findOne({ where: { nickname: id } });
+    if (!res) {
+      throw new BadRequestException({ message: '존재하지 않는 ID입니다' });
+    }
+    return res;
   }
 }

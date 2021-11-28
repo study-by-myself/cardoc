@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateTireDto } from './dto/create-tire.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -19,7 +19,6 @@ export class TiresService {
     const result = [];
     for (const item of createTireDto.data) {
       const res = await axios.get(`${BASE_URL}trim/${item.trimId}`);
-      //console.log(res);
       const { frontTire, rearTire } = res?.data?.spec?.driving;
       const [frontWidth, frontRest] = frontTire?.value.split('/');
       const [frontAspectRatio, frontWheelSize] = frontRest?.split('R');
@@ -46,6 +45,10 @@ export class TiresService {
   }
 
   async findOne(id: string) {
-    return await this.tiresRepository.findOne({ where: { user_id: id } });
+    const res = await this.tiresRepository.findOne({ where: { user_id: id } });
+    if (!res) {
+      throw new BadRequestException({ message: '존재하지 않는 ID입니다' });
+    }
+    return res;
   }
 }
