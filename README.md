@@ -8,6 +8,7 @@ git clone https://github.com/study-by-myself/cardoc.git
 
 ### start at 3000 port
 ```shell
+yarn
 yarn start
 ```
 
