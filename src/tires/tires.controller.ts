@@ -1,3 +1,4 @@
+import { JwtAuthGuard } from './../users/jwt-auth.guard';
 import {
   Controller,
   Get,
@@ -5,6 +6,7 @@ import {
   Body,
   Param,
   BadRequestException,
+  UseGuards,
 } from '@nestjs/common';
 import { TiresService } from './tires.service';
 import { CreateTireDto } from './dto/create-tire.dto';
@@ -13,6 +15,7 @@ import { CreateTireDto } from './dto/create-tire.dto';
 export class TiresController {
   constructor(private readonly tiresService: TiresService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Body() createTireDto: CreateTireDto) {
     try {
@@ -22,11 +25,13 @@ export class TiresController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   async findAll() {
     return await this.tiresService.findAll();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('/:id')
   async findOne(@Param('id') id: string) {
     try {

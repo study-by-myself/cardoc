@@ -1,3 +1,4 @@
+import { Type } from 'class-transformer';
 import { IsString, IsArray, IsNumber, ValidateNested } from 'class-validator';
 
 class UserTire {
@@ -10,6 +11,7 @@ class UserTire {
 
 export class CreateTireDto {
   @IsArray()
+  @Type(() => UserTire)
   @ValidateNested({ each: true })
   readonly data: UserTire[];
 }

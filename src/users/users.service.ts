@@ -25,11 +25,11 @@ export class UsersService {
       throw new BadRequestException({ message: '중복된 ID 입니다' });
     }
     const hashed = await bcrypt.hash(password, 10);
-    const newUser = await this.usersRepository.save({
+    await this.usersRepository.save({
       nickname: id,
       password: hashed,
     });
-    return { access_token: this.jwtService.sign({ id: newUser.id }) };
+    return { access_token: this.jwtService.sign({ id }) };
   }
 
   async findAll(): Promise<User[]> {
