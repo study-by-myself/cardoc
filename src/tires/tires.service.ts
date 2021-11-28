@@ -15,7 +15,6 @@ export class TiresService {
   ) {}
 
   async create(createTireDto: CreateTireDto) {
-    // 인가 구현하기
     const result = [];
     for (const item of createTireDto.data) {
       const res = await axios.get(`${BASE_URL}trim/${item.trimId}`);
