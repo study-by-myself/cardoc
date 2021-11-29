@@ -6,6 +6,7 @@ COPY ./src /directory/src
 
 COPY ./package.json /directory
 COPY ./tsconfig.json /directory
+COPY ./tsconfig.build.json /directory
 
 
 WORKDIR /directory
