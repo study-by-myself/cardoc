@@ -1,3 +1,9 @@
+자세한 정보를 보고 싶다면 👉👉👉 [Wiki](https://github.com/study-by-myself/cardoc/wiki)
+
+
+## Demo url
+http://49.50.165.172/api/
+
 
 ## How to run
 
@@ -12,7 +18,7 @@ yarn
 yarn start
 ```
 
-### using swagger url
+### using swagger url at local
 ```shell
 localhost:3000/api
 ```
